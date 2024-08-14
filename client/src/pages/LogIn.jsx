@@ -10,6 +10,8 @@ export default function LogIn() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -19,9 +21,9 @@ export default function LogIn() {
     }
 
     const urlMap = {
-      Principal: "http://localhost:3000/api/principal/signIn",
-      Teacher: "http://localhost:3000/api/teacher/signIn",
-      Student: "http://localhost:3000/api/student/signIn",
+      Principal: `${apiBaseUrl}/api/principal/signIn`,
+      Teacher: `${apiBaseUrl}/api/teacher/signIn`,
+      Student: `${apiBaseUrl}/api/student/signIn`,
     };
 
     const dashboardMap = {

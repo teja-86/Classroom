@@ -5,22 +5,24 @@ export default function Dashboard() {
   const [selectedClassroom, setSelectedClassroom] = useState('');
   const [classrooms, setClassrooms] = useState([]); // To store classrooms for selection
 
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
   useEffect(() => {
     // Fetch classrooms to populate the dropdown
-    fetch('http://localhost:3000/api/classroom/test')
+    fetch(`${apiBaseUrl}/api/classroom/test`)
       .then(response => response.json())
       .then(data => setClassrooms(data))
       .catch(error => console.error('Error fetching classrooms:', error));
-  }, []);
+  }, [apiBaseUrl]);
 
   useEffect(() => {
     if (selectedClassroom) {
-      fetch(`http://localhost:3000/api/student/classroom/${selectedClassroom}`)
+      fetch(`${apiBaseUrl}/api/student/classroom/${selectedClassroom}`)
         .then(response => response.json())
         .then(data => setStudents(data))
         .catch(error => console.error('Error fetching students:', error));
     } 
-  }, [selectedClassroom]);
+  }, [apiBaseUrl, selectedClassroom]);
 
   return (
     <div className="p-8 bg-gray-50 min-h-screen">

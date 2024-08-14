@@ -8,8 +8,10 @@ export default function Dashboard() {
   const [editingStudentId, setEditingStudentId] = useState(null);
   const [editedStudentData, setEditedStudentData] = useState({ name: '', email: '' });
 
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
   useEffect(() => {
-    fetch('http://localhost:3000/api/classroom/test')
+    fetch(`${apiBaseUrl}/api/classroom/test`)
       .then(response => response.json())
       .then(data => setClassrooms(data))
       .catch(error => console.error('Error fetching classrooms:', error));
@@ -17,7 +19,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (selectedClassroom) {
-      fetch(`http://localhost:3000/api/student/classroom/${selectedClassroom}`)
+      fetch(`${apiBaseUrl}/api/student/classroom/${selectedClassroom}`)
         .then(response => response.json())
         .then(data => setStudents(data))
         .catch(error => console.error('Error fetching students:', error));
@@ -36,7 +38,7 @@ export default function Dashboard() {
 
   const handleUpdate = async (studentId, updatedData) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/student/update/${studentId}`, {
+      const response = await fetch(`${apiBaseUrl}/api/student/update/${studentId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedData),
@@ -58,7 +60,7 @@ export default function Dashboard() {
 
   const handleDelete = async (studentId) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/student/delete/${studentId}`, {
+      const response = await fetch(`${apiBaseUrl}/api/student/delete/${studentId}`, {
         method: 'DELETE',
       });
 

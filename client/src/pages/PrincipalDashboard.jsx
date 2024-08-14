@@ -16,6 +16,9 @@ export default function Dashboard() {
   const [editingStudentId, setEditingStudentId] = useState(null);
   const [editedTeacherData, setEditedTeacherData] = useState({});
   const [editedStudentData, setEditedStudentData] = useState({});
+
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
   
 
   useEffect(() => {
@@ -26,7 +29,7 @@ export default function Dashboard() {
 
   const fetchTeachers = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/teacher/test');
+      const response = await fetch(`${apiBaseUrl}/api/teacher/test`);
       const data = await response.json();
       if (data && data.users) {
         setTeachers(data.users);
@@ -41,7 +44,7 @@ export default function Dashboard() {
 
   const fetchStudents = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/student/test');
+      const response = await fetch(`${apiBaseUrl}/api/student/test`);
       const data = await response.json();
       if (data && data.users) {
         setStudents(data.users);
@@ -56,7 +59,7 @@ export default function Dashboard() {
 
   const fetchClassrooms = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/classroom/test');
+      const response = await fetch(`${apiBaseUrl}/api/classroom/test`);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -70,7 +73,7 @@ export default function Dashboard() {
 
   const handleDelete = async (id, type) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/${type}/test/${id}`, { method: 'DELETE' });
+      const response = await fetch(`${apiBaseUrl}/api/${type}/test/${id}`, { method: 'DELETE' });
       if (response.ok) {
         toast.success(`${type.charAt(0).toUpperCase() + type.slice(1)} deleted successfully!`);
         type === 'teacher' ? fetchTeachers() : fetchStudents();
@@ -87,7 +90,7 @@ export default function Dashboard() {
     console.log(updates);
     
     try {
-      const response = await fetch(`http://localhost:3000/api/${type}/update/${id}`, {
+      const response = await fetch(`${apiBaseUrl}/api/${type}/update/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates),
@@ -106,7 +109,7 @@ export default function Dashboard() {
 
   const handleCreateClassroom = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/classroom/create', {
+      const response = await fetch(`${apiBaseUrl}/api/classroom/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: newClassroomName, startTime: newClassroomStartTime, endTime: newClassroomEndTime, days: newClassroomDays }),
@@ -133,7 +136,7 @@ export default function Dashboard() {
       toast.error('Teacher and Classroom must be selected.');
       return;
     }
-    const response = await fetch(`http://localhost:3000/api/teacher/update/classroomAndStudent/${selectedTeacher}`, {
+    const response = await fetch(`${apiBaseUrl}/api/teacher/update/classroomAndStudent/${selectedTeacher}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ classroom: selectedClassroom, student: selectedStudent }),

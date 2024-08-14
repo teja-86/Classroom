@@ -11,6 +11,8 @@ function Signup() {
   const [password, setPassword] = useState("");
   // const [classroomId, setClassroomId] = useState("");
   const navigate = useNavigate();
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,8 +25,8 @@ function Signup() {
     
 
     const urlMap = {
-      Teacher: "http://localhost:3000/api/teacher/signUp",
-      Student: "http://localhost:3000/api/student/signUp",
+      Teacher: `${apiBaseUrl}/api/teacher/signUp`,
+      Student: `${apiBaseUrl}/api/student/signUp`,
     };
 
 
