@@ -4,6 +4,14 @@
 
 The **Classroom Management System** is a robust web application built using the MERN stack (MongoDB, Express.js, React, Node.js) designed to streamline classroom management for educational institutions. It enables administrators, teachers, and students to efficiently manage their roles, schedules, and interactions within a classroom environment.
 
+## Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Configuration](#configuration)
+- [Contributing](#contributing)
+
 ## Features
 
 - **Teacher & Student Management**: Easily add, update, and delete teacher and student profiles.
@@ -37,4 +45,29 @@ Ensure you have the following installed:
    ```bash
    git clone https://github.com/teja-86/Classroom.git
    cd Classroom
-   start your project
+   ```
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+3. **Set up the environment variables:**
+   ```bash
+   PORT=5000
+   MONGO_URI=your-mongodb-connection-string or localhost mongodb url
+
+## Configuration
+
+You can customize the application's settings via the `.env` file:
+
+- `PORT`: The port number on which the server will run.
+- `MONGO_URI`: The database connection string or MongoDB localhost URL.
+
+## Contributing
+
+Contributions are welcome! Please follow these steps to contribute:
+
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature/YourFeature`.
+3. Make your changes and commit them: `git commit -m 'Add Your Feature'`.
+4. Push to the branch: `git push origin feature/YourFeature`.
+5. Open a Pull Request.
